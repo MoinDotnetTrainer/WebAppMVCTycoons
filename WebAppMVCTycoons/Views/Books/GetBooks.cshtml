@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BooksModel>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Books List</h2>
+
+        <a asp-action="AddBooks" asp-controller="Books" class="btn btn-success">
+            Add New Book
+        </a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Book Name</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var book in Model)
+                        {
+                            <tr>
+                                <td>@book.BookID</td>
+                                <td>@book.Name</td>
+                                <td>@book.Author</td>
+                                <td>₹ @book.Price</td>
+
+                                 <td>
+                                    <a asp-action="EditBooks"
+                                       asp-route-BookID="@book.BookID"
+                                       class="btn btn-sm btn-warning">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="BookDetails"
+                                       asp-route-BookID="@book.BookID"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="DeleteBook"
+                                       asp-route-BookID="@book.BookID"
+                                       class="btn btn-sm btn-danger">
+                                        Delete
+                                    </a>
+                                </td> 
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

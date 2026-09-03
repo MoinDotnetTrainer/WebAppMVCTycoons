@@ -1,0 +1,99 @@
+﻿@model BooksModel
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-book"></i>
+                        Book Details
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">
+                            Book ID
+                        </div>
+
+                        <div class="col-sm-8">
+                            <span class="badge bg-secondary">
+                                @Model.BookID
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">
+                            Book Name
+                        </div>
+
+                        <div class="col-sm-8">
+                            @Model.Name
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">
+                            Author
+                        </div>
+
+                        <div class="col-sm-8">
+                            @Model.Author
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">
+                            Price
+                        </div>
+
+                        <div class="col-sm-8">
+                            <span class="badge bg-success fs-6">
+                                ₹ @Model.Price
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                        <a asp-action="GetBooks"
+                           class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i>
+                            Back to List
+                        </a>
+
+                        <a asp-action="EditBooks"
+                           asp-route-id="@Model.BookID"
+                           class="btn btn-warning">
+                            <i class="bi bi-pencil"></i>
+                            Edit
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
