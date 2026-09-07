@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Models
+namespace Dataaccess.Models
 {
-    public class Appdb : DbContext
+    public class AppDb : DbContext
     {
-        public Appdb(DbContextOptions<Appdb> options) : base(options) { }
+        public AppDb(DbContextOptions<AppDb> options) : base(options) { }
         // Initiate a conn with db
         // db value will be noe passed dynamically
-
         public DbSet<Users> users { get; set; } // table
-        public DbSet<GenModel> genmodel { get; set; } // table
+
     }
 }

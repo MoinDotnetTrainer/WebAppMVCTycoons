@@ -1,11 +1,7 @@
-using DataAccessLayer.Irepo;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repo;
+using Dataaccess.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
 
-namespace WebAppMVCReposPattern
+namespace WebAppMVCRepos
 {
     public class Program
     {
@@ -16,20 +12,15 @@ namespace WebAppMVCReposPattern
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // Constr Configuration
-            builder.Services.AddDbContext<Appdb>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("Constr")
-    ));
+
+            builder.Services.AddDbContext<AppDb>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Constr"));
+            });
 
 
-
-            // Dependency injection
-            builder.Services.AddScoped<DataAccessLayer.Irepo.IUser, DataAccessLayer.Repo.UserRepo>();
-            builder.Services.AddScoped(typeof(InterfacGeneric<>), typeof(RepoGeneric<>));
-
-
-
+            // DI
+            builder.Services.AddScoped<Dataaccess.IService.IUsers, Dataaccess.Services.UsersService>();
 
             var app = builder.Build();
 

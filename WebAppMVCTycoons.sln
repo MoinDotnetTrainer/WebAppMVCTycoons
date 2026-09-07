@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppMVCReposPattern", "We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{8D549B42-CAFF-49F2-9810-0A19DEF4FF34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppMVCRepos", "WebAppMVCRepos\WebAppMVCRepos.csproj", "{98C6AFDF-6D0A-48F2-B1EC-D02655A15D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataaccess", "Dataaccess\Dataaccess.csproj", "{24758FC7-3C48-42E0-BEBC-A7ABBE15DEC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8D549B42-CAFF-49F2-9810-0A19DEF4FF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D549B42-CAFF-49F2-9810-0A19DEF4FF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D549B42-CAFF-49F2-9810-0A19DEF4FF34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C6AFDF-6D0A-48F2-B1EC-D02655A15D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C6AFDF-6D0A-48F2-B1EC-D02655A15D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C6AFDF-6D0A-48F2-B1EC-D02655A15D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C6AFDF-6D0A-48F2-B1EC-D02655A15D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24758FC7-3C48-42E0-BEBC-A7ABBE15DEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24758FC7-3C48-42E0-BEBC-A7ABBE15DEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24758FC7-3C48-42E0-BEBC-A7ABBE15DEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24758FC7-3C48-42E0-BEBC-A7ABBE15DEC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
