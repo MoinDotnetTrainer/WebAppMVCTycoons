@@ -4,6 +4,7 @@ using Dataaccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dataaccess.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20260908043542_dept")]
+    partial class dept
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,40 +24,6 @@ namespace Dataaccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Dataaccess.Models.Aadhar", b =>
-                {
-                    b.Property<int>("AadharID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AadharID"));
-
-                    b.Property<string>("userName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AadharID");
-
-                    b.ToTable("Aadhar");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CustomerID");
-
-                    b.ToTable("Customer");
-                });
 
             modelBuilder.Entity("Dataaccess.Models.Dept", b =>
                 {
@@ -88,23 +57,6 @@ namespace Dataaccess.Migrations
                     b.HasKey("DeptID");
 
                     b.ToTable("dept1");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Dept2", b =>
-                {
-                    b.Property<int>("DeptID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeptID"));
-
-                    b.Property<string>("DeptName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DeptID");
-
-                    b.ToTable("Dept2");
                 });
 
             modelBuilder.Entity("Dataaccess.Models.Emp", b =>
@@ -155,79 +107,6 @@ namespace Dataaccess.Migrations
                     b.HasKey("EID");
 
                     b.ToTable("emp1");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Emp2", b =>
-                {
-                    b.Property<int>("EID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EID"));
-
-                    b.Property<int>("DeptID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("xyz")
-                        .HasColumnType("int");
-
-                    b.HasKey("EID");
-
-                    b.HasIndex("DeptID");
-
-                    b.ToTable("Emp2");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Orders", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OrderName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.ToTable("MyOrders");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Pan", b =>
-                {
-                    b.Property<int>("PanNO")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PanNO"));
-
-                    b.Property<int>("AAdharRefID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PanuserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PanNO");
-
-                    b.HasIndex("AAdharRefID");
-
-                    b.ToTable("Pan");
                 });
 
             modelBuilder.Entity("Dataaccess.Models.Users", b =>
@@ -321,39 +200,6 @@ namespace Dataaccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Dept");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Emp2", b =>
-                {
-                    b.HasOne("Dataaccess.Models.Dept2", "Dept")
-                        .WithMany()
-                        .HasForeignKey("DeptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dept");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Orders", b =>
-                {
-                    b.HasOne("Dataaccess.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Pan", b =>
-                {
-                    b.HasOne("Dataaccess.Models.Aadhar", "Aadhar")
-                        .WithMany()
-                        .HasForeignKey("AAdharRefID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aadhar");
                 });
 #pragma warning restore 612, 618
         }

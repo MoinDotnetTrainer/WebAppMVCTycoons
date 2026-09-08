@@ -21,6 +21,8 @@ namespace WebAppMVCRepos
 
             // DI
             builder.Services.AddScoped<Dataaccess.IService.IUsers, Dataaccess.Services.UsersService>();
+            builder.Services.AddScoped<Dataaccess.IService.IValidate, Dataaccess.Services.ValidateService>();
+            builder.Services.AddScoped<Dataaccess.IService.IRelation, Dataaccess.Services.RelationService>();
 
             var app = builder.Build();
 

@@ -56,6 +56,8 @@ namespace WebAppMVCRepos.Controllers
                 Gender = data.Gender
 
             };
+
+
             var res = await _iusers.AddUsers(mydata);
             if (res)
             {

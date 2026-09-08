@@ -4,6 +4,7 @@ using Dataaccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dataaccess.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20260908044341_pan")]
+    partial class pan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,23 +40,6 @@ namespace Dataaccess.Migrations
                     b.HasKey("AadharID");
 
                     b.ToTable("Aadhar");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CustomerID");
-
-                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("Dataaccess.Models.Dept", b =>
@@ -186,28 +172,6 @@ namespace Dataaccess.Migrations
                     b.ToTable("Emp2");
                 });
 
-            modelBuilder.Entity("Dataaccess.Models.Orders", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OrderName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.ToTable("MyOrders");
-                });
-
             modelBuilder.Entity("Dataaccess.Models.Pan", b =>
                 {
                     b.Property<int>("PanNO")
@@ -332,17 +296,6 @@ namespace Dataaccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Dept");
-                });
-
-            modelBuilder.Entity("Dataaccess.Models.Orders", b =>
-                {
-                    b.HasOne("Dataaccess.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Dataaccess.Models.Pan", b =>
