@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Service type</th>
+            <th>First Instance ID</th>
+            <th>Second Instance ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Transient</td>
+            <td>@ViewBag.Transient1</td>
+            <td>@ViewBag.Transient2</td>
+        </tr>
+        <tr>
+            <td>Scoped</td>
+            <td>@ViewBag.Scoped1</td>
+            <td>@ViewBag.Scoped2</td>
+        </tr>
+        <tr>
+            <td>Singleton</td>
+            <td>@ViewBag.Singleton1</td>
+            <td>@ViewBag.Singleton2</td>
+        </tr>
+    </tbody>
+</table>
+
+

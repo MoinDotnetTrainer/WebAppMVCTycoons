@@ -24,6 +24,16 @@ namespace WebAppMVCRepos
             builder.Services.AddScoped<Dataaccess.IService.IValidate, Dataaccess.Services.ValidateService>();
             builder.Services.AddScoped<Dataaccess.IService.IRelation, Dataaccess.Services.RelationService>();
 
+
+            // Line line of Ur instance
+            builder.Services.AddTransient<Dataaccess.IService.ITransient, Dataaccess.Services.TaskService>();
+            builder.Services.AddScoped<Dataaccess.IService.Iscoped, Dataaccess.Services.TaskService>();
+            builder.Services.AddSingleton<Dataaccess.IService.Isingleton, Dataaccess.Services.TaskService>();
+
+
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
