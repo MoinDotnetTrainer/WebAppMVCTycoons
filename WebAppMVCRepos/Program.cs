@@ -23,15 +23,16 @@ namespace WebAppMVCRepos
             builder.Services.AddScoped<Dataaccess.IService.IUsers, Dataaccess.Services.UsersService>();
             builder.Services.AddScoped<Dataaccess.IService.IValidate, Dataaccess.Services.ValidateService>();
             builder.Services.AddScoped<Dataaccess.IService.IRelation, Dataaccess.Services.RelationService>();
+            builder.Services.AddScoped<Dataaccess.IService.IUsersSp, Dataaccess.Services.UsersServiceSp>();
 
 
             // Line line of Ur instance
             builder.Services.AddTransient<Dataaccess.IService.ITransient, Dataaccess.Services.TaskService>();
             builder.Services.AddScoped<Dataaccess.IService.Iscoped, Dataaccess.Services.TaskService>();
             builder.Services.AddSingleton<Dataaccess.IService.Isingleton, Dataaccess.Services.TaskService>();
+           
 
-
-
+            // cookies --> single
 
 
             var app = builder.Build();

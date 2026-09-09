@@ -5,10 +5,11 @@ using WebAppMVCRepos.Models;
 
 namespace WebAppMVCRepos.Controllers
 {
-    public class UsersOpsController : Controller
+
+    public class UsersTaskController : Controller
     {
         public readonly IUsers _iusers;
-        public UsersOpsController(IUsers iusers)
+        public UsersTaskController(IUsers iusers)
         {
             _iusers = iusers;
         }
@@ -30,7 +31,7 @@ namespace WebAppMVCRepos.Controllers
 
             return View(mydata);
 
-           
+
 
         }
 
@@ -48,7 +49,7 @@ namespace WebAppMVCRepos.Controllers
 
             var mydata = new Users
             {
-                Name = data.Name.ToUpper(),
+                Name = data.Name,
                 Email = data.Email,
                 Password = data.Password,
                 Dob = data.Dob,
@@ -178,7 +179,5 @@ namespace WebAppMVCRepos.Controllers
             }
             return View();
         }
-
-
     }
 }

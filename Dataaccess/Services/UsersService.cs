@@ -91,9 +91,7 @@ namespace Dataaccess.Services
         {
             try
             {
-                var users = await _db.users.ToListAsync();
-
-
+                var users = await _db.users.AsNoTracking().ToListAsync();
                 return users;
             }
             catch (Exception ex)
@@ -104,9 +102,11 @@ namespace Dataaccess.Services
 
         public async Task<Users> GetUserByID(int id)
         {
-            var res = await _db.users
-       .AsNoTracking()
-       .FirstOrDefaultAsync(x => x.ID == id);
+            //     var res = await _db.users
+            //.AsNoTracking()
+            //.FirstOrDefaultAsync(x => x.ID == id);
+
+            var res = await _db.users.FindAsync(id);
             if (res == null)
             {
                 throw new Exception($"User with ID {id} not found.");
@@ -116,7 +116,9 @@ namespace Dataaccess.Services
 
         public async Task UpdateUsers(Users data)
         {
-            var existingUser = await _db.users.FindAsync(data.ID);
+         // var existingUser = await _db.users.FindAsync(data.ID);
+
+            var existingUser = await _db.users.AsNoTracking().FirstOrDefaultAsync(c => c.ID == data.ID);
             if (existingUser == null)
             {
                 throw new Exception($"User with ID {data.ID} not found.");
@@ -126,6 +128,8 @@ namespace Dataaccess.Services
             existingUser.Dob = data.Dob;
             existingUser.Age = data.Age;
             existingUser.Gender = data.Gender;
+
+            // update fun
             await _db.SaveChangesAsync();
         }
 

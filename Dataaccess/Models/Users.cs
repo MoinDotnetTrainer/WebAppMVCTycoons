@@ -15,6 +15,8 @@ namespace Dataaccess.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+
+        //[DataType(DataType.Password)]
         public string Password { get; set; }
         public DateTime? Dob { get; set; }
         public int? Age { get; set; }
