@@ -1,6 +1,10 @@
 ﻿using Dataaccess.IService;
 using Dataaccess.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebAppMVCRepos.Models;
 
 namespace WebAppMVCRepos.Controllers
@@ -12,8 +16,20 @@ namespace WebAppMVCRepos.Controllers
         {
             _iusers = iusers;
         }
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
+            string IsloggedIn = HttpContext.Session.GetString("useremail");
+            if (IsloggedIn == null)
+            {
+                return RedirectToAction("Login");
+            }
             // get all data
 
             var res = await _iusers.GetUsers();
@@ -25,12 +41,13 @@ namespace WebAppMVCRepos.Controllers
                 Email = x.Email,
                 Dob = x.Dob,
                 Age = x.Age,
-                Gender = x.Gender
+                Gender = x.Gender,
+                Role = x.Role,
             }).ToList();
 
             return View(mydata);
 
-           
+
 
         }
 
@@ -38,6 +55,7 @@ namespace WebAppMVCRepos.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+
             // add users
             return View();
         }
@@ -53,7 +71,8 @@ namespace WebAppMVCRepos.Controllers
                 Password = data.Password,
                 Dob = data.Dob,
                 Age = data.Age,
-                Gender = data.Gender
+                Gender = data.Gender,
+                Role = data.Role,
 
             };
 
@@ -69,6 +88,11 @@ namespace WebAppMVCRepos.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            string IsloggedIn = HttpContext.Session.GetString("useremail");
+            if (IsloggedIn == null)
+            {
+                return RedirectToAction("Login");
+            }
             // update users
             try
             {
@@ -86,7 +110,8 @@ namespace WebAppMVCRepos.Controllers
                     Email = user.Email,
                     Dob = user.Dob,
                     Age = user.Age,
-                    Gender = user.Gender
+                    Gender = user.Gender,
+                    Role = user.Role,
                 };
 
                 return View(mydata);
@@ -109,7 +134,8 @@ namespace WebAppMVCRepos.Controllers
                 Password = data.Password,
                 Dob = data.Dob,
                 Age = data.Age,
-                Gender = data.Gender
+                Gender = data.Gender,
+                Role = data.Role,
             });
             return RedirectToAction("Index");
         }
@@ -117,6 +143,11 @@ namespace WebAppMVCRepos.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            string IsloggedIn = HttpContext.Session.GetString("useremail");
+            if (IsloggedIn == null)
+            {
+                return RedirectToAction("Login");
+            }
             // update users
             try
             {
@@ -134,7 +165,8 @@ namespace WebAppMVCRepos.Controllers
                     Email = user.Email,
                     Dob = user.Dob,
                     Age = user.Age,
-                    Gender = user.Gender
+                    Gender = user.Gender,
+                    Role = user.Role,
                 };
 
                 return View(mydata);
@@ -163,6 +195,9 @@ namespace WebAppMVCRepos.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto data)
         {
+
+            ClaimsIdentity identity = null;
+            bool Isautheticated = false;
             // validate
 
             var loginData = new Login
@@ -172,13 +207,60 @@ namespace WebAppMVCRepos.Controllers
             };
             var res = await _iusers.ValidateUser(loginData);
 
+            var userdata = await _iusers.GetUserByEmail(data.Email);
+
+            // auth and authorization
+
+            // identtiy by its role and claims
+
+            HttpContext.Session.SetString("username", userdata.Name);
+            HttpContext.Session.SetString("useremail", userdata.Email);
+
+            // when useremail is null
             if (res)
             {
-                return RedirectToAction("Index");
+                identity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name,userdata.Name),
+                    new Claim(ClaimTypes.Email,userdata.Email),
+                    new Claim(ClaimTypes.Role,userdata.Role),
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+                Isautheticated = true;
+
+                if (Isautheticated)
+                {
+                    var princiapl = new ClaimsPrincipal(identity);
+                    var redirect = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, princiapl);
+                    return RedirectToAction("Index", "UsersOps", redirect);
+
+
+                }
+                else
+                {
+                    return View();
+                }
             }
+
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            // validate
 
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
+
+
+
+        public IActionResult Sample()
+        {
+            string str = null;
+            ViewBag.data = str.Length;
+
+            ViewBag.error = "unable to find len";
+            return View();
+        }
     }
 }

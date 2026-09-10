@@ -12,6 +12,7 @@ namespace WebAppMVCRepos.Models
         public DateTime? Dob { get; set; }
         public int? Age { get; set; }
         public string? Gender { get; set; }  // dropdown 
+        public string? Role { get; set; }  // dropdown 
     }
 
     //public record UsersDto

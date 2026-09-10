@@ -1,4 +1,5 @@
 using Dataaccess.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebAppMVCRepos
@@ -30,14 +31,30 @@ namespace WebAppMVCRepos
             builder.Services.AddTransient<Dataaccess.IService.ITransient, Dataaccess.Services.TaskService>();
             builder.Services.AddScoped<Dataaccess.IService.Iscoped, Dataaccess.Services.TaskService>();
             builder.Services.AddSingleton<Dataaccess.IService.Isingleton, Dataaccess.Services.TaskService>();
-           
+
 
             // cookies --> single
+
+            //session
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // authentication
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -47,9 +64,10 @@ namespace WebAppMVCRepos
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

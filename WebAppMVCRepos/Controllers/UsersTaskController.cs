@@ -13,6 +13,8 @@ namespace WebAppMVCRepos.Controllers
         {
             _iusers = iusers;
         }
+
+        [ExecuteBeforeActionRuns]
         public async Task<IActionResult> Index()
         {
             // get all data

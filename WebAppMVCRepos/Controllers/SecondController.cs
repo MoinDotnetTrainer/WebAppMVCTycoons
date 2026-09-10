@@ -6,6 +6,7 @@ namespace WebAppMVCRepos.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.data = HttpContext.Session.GetString("Sampledata");
             return View();
         }
         public IActionResult Index1()
@@ -14,7 +15,14 @@ namespace WebAppMVCRepos.Controllers
             //TempData.Keep("tddata");
             //ViewBag.mydata = data;
 
-            ViewBag.mydata = TempData.Peek("tddata");
+            // ViewBag.mydata = TempData.Peek("tddata");
+            ViewBag.data = HttpContext.Session.GetString("Sampledata");
+            return View();
+        }
+
+        public IActionResult Index2()
+        {
+            ViewBag.data = HttpContext.Session.GetString("Sampledata");
             return View();
         }
 

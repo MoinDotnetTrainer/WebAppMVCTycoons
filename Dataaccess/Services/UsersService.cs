@@ -58,7 +58,8 @@ namespace Dataaccess.Services
 
                     Dob = data.Dob,
                     Age = data.Age,
-                    Gender = data.Gender
+                    Gender = data.Gender,
+                    Role = data.Role
                 };
 
                 // 5. Add to database
@@ -116,7 +117,7 @@ namespace Dataaccess.Services
 
         public async Task UpdateUsers(Users data)
         {
-         // var existingUser = await _db.users.FindAsync(data.ID);
+            // var existingUser = await _db.users.FindAsync(data.ID);
 
             var existingUser = await _db.users.AsNoTracking().FirstOrDefaultAsync(c => c.ID == data.ID);
             if (existingUser == null)
@@ -128,6 +129,7 @@ namespace Dataaccess.Services
             existingUser.Dob = data.Dob;
             existingUser.Age = data.Age;
             existingUser.Gender = data.Gender;
+            existingUser.Role = data.Role;
 
             // update fun
             await _db.SaveChangesAsync();
@@ -152,6 +154,11 @@ namespace Dataaccess.Services
             var user = await _db.users
                 .AnyAsync(u => u.Email == data.Email && u.Password == data.Password);
             return user; // T F
+        }
+
+        public async Task<Users> GetUserByEmail(string Email)
+        {
+            return await _db.users.FirstOrDefaultAsync(u => u.Email == Email);
         }
     }
 }

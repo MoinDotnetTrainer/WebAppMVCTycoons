@@ -16,10 +16,10 @@ namespace WebAppMVCRepos.Controllers
         {
 
             List<Std> stds = new List<Std>() {
-              new Std{ID=1,Name="A",Age=23},
-              new Std{ID=2,Name="B",Age=34},
-              new Std{ID=3,Name="C",Age=32},
-           };
+               new Std{ID=1,Name="A",Age=23},
+               new Std{ID=2,Name="B",Age=34},
+               new Std{ID=3,Name="C",Age=32},
+            };
 
             //   ViewBag.complexdata = stds;  // dynamic prop
             ViewData["complexdata"] = stds;
@@ -31,6 +31,8 @@ namespace WebAppMVCRepos.Controllers
             //TempData["tddata"] = "hello from TempData";
             //return RedirectToAction("Index1", "Second");
 
+
+            HttpContext.Session.SetString("Sampledata",System.DateTime.Now.ToLongTimeString());
             return View();
         }
 
@@ -38,12 +40,15 @@ namespace WebAppMVCRepos.Controllers
         {
             // string data = ViewBag.vbdata;
             // string data = ViewData["vddata"].ToString();
-            string data = TempData["tddata"].ToString();
-            ViewBag.actualdata = data;
+           // string data = TempData["tddata"].ToString();
+          //  ViewBag.actualdata = data;
+
+            ViewBag.data1 = HttpContext.Session.GetString("Sampledata"); 
             return View();
         }
         public IActionResult Index2()
         {
+            ViewBag.data = HttpContext.Session.GetString("Sampledata");
             return View();
         }
 

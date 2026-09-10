@@ -5,6 +5,7 @@ using WebAppMVCRepos.Models;
 
 namespace WebAppMVCRepos.Controllers
 {
+    [ExecuteBeforeActionRuns]
     public class UsersOpsSpController : Controller
     {
         public readonly IUsersSp _Iuser;

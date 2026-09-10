@@ -19,5 +19,7 @@ namespace Dataaccess.IService
         Task UpdateUsers(Users data);
         Task DeleteUsers(int id);
         Task<bool> ValidateUser(Login data);
+
+        Task<Users> GetUserByEmail(string Email);
     }
 }
