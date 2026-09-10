@@ -8,5 +8,9 @@ namespace WebAppMVCRepos.Controllers
         {
             return View();
         }
+
+        public IActionResult  Page404() {
+            return View();
+        }
     }
 }
