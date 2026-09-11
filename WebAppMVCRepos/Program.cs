@@ -72,7 +72,7 @@ namespace WebAppMVCRepos
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=UsersOps}/{action=Login}/{id?}");
 
             app.Run();
         }

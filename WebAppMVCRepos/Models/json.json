@@ -1,0 +1,32 @@
+[
+  {
+    "name": "xyz",
+    "email": "xyz@yahoo.com",
+    "age": 34,
+    "status": true,
+    "salary": 3435.54,
+    "EmpID": null,
+    "Qualification": [ "Btech", "Mtech", "BBA" ],
+    "Family": {
+      "FatherName": "xyz1",
+      "Mothername": "xyz2",
+      "Add": "Hyd"
+    }
+  },
+  {
+    "name": "xyz",
+    "email": "xyz@yahoo.com",
+    "age": 34,
+    "status": true,
+    "salary": 3435.54,
+    "EmpID": null,
+    "Qualification": [ "Btech", "Mtech", "BBA" ],
+    "Family": {
+      "FatherName": "xyz1",
+      "Mothername": "xyz2",
+      "Add": "Hyd"
+    }
+  }
+]
+
+//string , number , floating, bool , null,array,object

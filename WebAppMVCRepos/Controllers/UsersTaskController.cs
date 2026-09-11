@@ -5,7 +5,7 @@ using WebAppMVCRepos.Models;
 
 namespace WebAppMVCRepos.Controllers
 {
-
+    [Route("[controller]/[action]")] // as it is
     public class UsersTaskController : Controller
     {
         public readonly IUsers _iusers;
@@ -14,7 +14,7 @@ namespace WebAppMVCRepos.Controllers
             _iusers = iusers;
         }
 
-        [ExecuteBeforeActionRuns]
+    //  [ExecuteBeforeActionRuns]
         public async Task<IActionResult> Index()
         {
             // get all data

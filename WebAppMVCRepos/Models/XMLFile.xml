@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Company>
+	<emp>
+		<Name>xyz</Name>
+		<email>xyz@yahoo,com</email>
+		<dept>IT</dept>
+	</emp>
+
+	<emp>
+		<name>abc</name>
+		<email>abc@yahoo.com</email>
+		<age>23</age>
+	</emp>
+</Company>
