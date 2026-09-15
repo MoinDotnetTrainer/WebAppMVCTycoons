@@ -107,7 +107,8 @@ namespace Dataaccess.Services
             //.AsNoTracking()
             //.FirstOrDefaultAsync(x => x.ID == id);
 
-            var res = await _db.users.FindAsync(id);
+            var res = await _db.users.FirstOrDefaultAsync(x=>x.ID==id);
+
             if (res == null)
             {
                 throw new Exception($"User with ID {id} not found.");
@@ -117,9 +118,9 @@ namespace Dataaccess.Services
 
         public async Task UpdateUsers(Users data)
         {
-            // var existingUser = await _db.users.FindAsync(data.ID);
+            var existingUser = await _db.users.FindAsync(data.ID);
 
-            var existingUser = await _db.users.AsNoTracking().FirstOrDefaultAsync(c => c.ID == data.ID);
+          //  var existingUser = await _db.users.AsNoTracking().FirstOrDefaultAsync(c => c.ID == data.ID);
             if (existingUser == null)
             {
                 throw new Exception($"User with ID {data.ID} not found.");
